@@ -3,7 +3,7 @@ title: "Incidencia de Tumores Malignos en Costa Rica"
 output: html_document
 ---
 
-Isaac Cordero Tapia - c Santiago Moreno Granados - c2022040858\
+Isaac Cordero Tapia - c2022193583 Santiago Moreno Granados - c2022040858\
 
 ```{r, echo=FALSE}
 source('setup.r') #para agarrar las librerias
