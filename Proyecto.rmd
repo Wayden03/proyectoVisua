@@ -1,17 +1,18 @@
 ---
 title: "Accidentes de tránsito en Costa Rica"
-output: 
+output: html_document
 ---
 
-Isaac Cordero Tapia - c2022193583 Santiago Moreno Granados - c2022040858
+Isaac Cordero Tapia - c2022193583 || Santiago Moreno Granados - c2022040858
 
 ```{r, echo=FALSE}
 source('setup.r') #para agarrar las librerias
+data <- read.csv("accidentes.csv", header=TRUE, sep=";")
 ```
 
-```{r, echo=FALSE}
+Gráficas Unidimensionales:
 
-data <- read.csv("accidentes.csv", header=TRUE, sep=";")
+```{r, echo=FALSE}
 
 plot1 <- ggplot(data, aes(Clase.de.accidente, fill=Clase.de.accidente)) +
   geom_bar() +
@@ -20,14 +21,23 @@ plot1 <- ggplot(data, aes(Clase.de.accidente, fill=Clase.de.accidente)) +
 plot2 <- ggplot(data, aes(x="", y="Tipo de accidente", fill=Tipo.de.accidente)) +
   geom_bar(stat="identity", width=1) +
   coord_polar("y", start=0) +
-  labs(title = "Tipo de Accidente", x = "Tipo de Accidente")
+  labs(title = "Tipo de Accidente", x = "Tipo de Accidente", fill = "Tipo de accidente")
 
 
 plot3 <- ggplot(data, aes(Provincia, fill=Provincia)) +
   geom_bar() +
-  labs(title = "Accidentes por Provincia", x = "Provincia", y = "Cantidad")
+  labs(title = "Accidentes por Provincia", x = "Provincia", y = "Cantidad", fill = "Tipo de accidente")
 
 plot1
 plot2
 plot3
 ```
+Grafica Multidimensional \
+```{r, echo = FALSE}
+plot4 <- ggplot(data, aes(x = Provincia, fill = Tipo.de.accidente)) +
+  geom_bar(position = "identity")  +
+  ggtitle("Tipos de accidente por provincia") +
+  labs(x = "Provincia", y = "Cantidad", fill = "Tipo de accidente") 
+plot4
+```
+
