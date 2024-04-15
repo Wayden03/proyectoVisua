@@ -8,6 +8,10 @@ attach(data)
 print(names(data))
 
 
+
+
+#--------------------Gráficas unidimensionales----------------------
+
 plot<- ggplot(data, aes(Clase.de.accidente, fill=Clase.de.accidente))+geom_bar()+
     ggtitle("Clase de Accidente")
 #print(plot)
@@ -22,3 +26,19 @@ print(plot2)
 plot3<-ggplot(data, aes(Provincia, fill=Provincia))+geom_bar()+
     ggtitle("Provincia")
 #print(plot3)
+
+
+
+#-------------------Gráficas bidimensionales---------------------
+
+
+#-------------------Gráficas multidimensionales------------------
+
+
+#-------------------Facetas--------------------------------------
+
+
+
+#-------------------Imagen Compuestada---------------------------
+
+#ggsave("Imagen_compuestada.png",mosaic_examp+plot+plot2+plot3+plot_layout(ncol =1), width=30, height=20,units="in")
