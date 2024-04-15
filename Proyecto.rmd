@@ -1,25 +1,33 @@
 ---
-title: "Incidencia de Tumores Malignos en Costa Rica"
-output: html_document
+title: "Accidentes de tránsito en Costa Rica"
+output: 
 ---
 
-Isaac Cordero Tapia - c2022193583 Santiago Moreno Granados - c2022040858\
+Isaac Cordero Tapia - c2022193583 Santiago Moreno Granados - c2022040858
 
 ```{r, echo=FALSE}
 source('setup.r') #para agarrar las librerias
 ```
 
-```{r, echo=FALSE} #EJEMPLO DE COMO INSERTAR CODIGO R [echo = FALSE es para que no se vea el codigo en el HTML, GRAFICA DE EJEMPLO]}
-data <- data.frame(
-  category = c("El pepe", "Category B", "Category C"),
-  value = c(30, 50, 20)
-)
+```{r, echo=FALSE}
 
-# Create the cake bar chart
-ggplot(data, aes(x = "", y = value, fill = category)) +
-  geom_col(width = 1, color = "white") +
-  coord_polar(theta = "y") +
-  theme_void() +
-  theme(legend.position = "bottom") +
-  labs(fill = "Category")
+data <- read.csv("accidentes.csv", header=TRUE, sep=";")
+
+plot1 <- ggplot(data, aes(Clase.de.accidente, fill=Clase.de.accidente)) +
+  geom_bar() +
+  labs(title = "Clase de Accidente", x = "Clase de Accidente", y = "Cantidad")
+
+plot2 <- ggplot(data, aes(x="", y="Tipo de accidente", fill=Tipo.de.accidente)) +
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  labs(title = "Tipo de Accidente", x = "Tipo de Accidente")
+
+
+plot3 <- ggplot(data, aes(Provincia, fill=Provincia)) +
+  geom_bar() +
+  labs(title = "Accidentes por Provincia", x = "Provincia", y = "Cantidad")
+
+plot1
+plot2
+plot3
 ```
