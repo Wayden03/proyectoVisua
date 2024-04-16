@@ -3,7 +3,7 @@ title: "Accidentes de tránsito en Costa Rica"
 output: html_document
 ---
 
-Isaac Cordero Tapia - c2022193583 || Santiago Moreno Granados - c2022040858
+Isaac Cordero Tapia - c2022193583 \|\| Santiago Moreno Granados - c2022040858
 
 ```{r, echo=FALSE}
 source('setup.r') #para agarrar las librerias
@@ -17,16 +17,17 @@ Gráficas Unidimensionales:
 plot1 <- ggplot(data, aes(Clase.de.accidente, fill=Clase.de.accidente)) +
   geom_bar() +
   labs(title = "Clase de Accidente", x = "Clase de Accidente", y = "Cantidad")
+plot1<-ggplotly(plot1)
 
 plot2 <- ggplot(data, aes(x="", y="Tipo de accidente", fill=Tipo.de.accidente)) +
   geom_bar(stat="identity", width=1) +
   coord_polar("y", start=0) +
-  labs(title = "Tipo de Accidente", x = "Tipo de Accidente", fill = "Tipo de accidente")
+  labs(title = "Tipo de Accidente")
 
-
-plot3 <- ggplot(data, aes(Provincia, fill=Provincia)) +
+plot3 <- ggplot(data, aes(Provincia)) +
   geom_bar() +
-  labs(title = "Accidentes por Provincia", x = "Provincia", y = "Cantidad", fill = "Tipo de accidente")
+  labs(title = "Accidentes por Provincia", x = "Provincia", y = "Cantidad")
+plot3 <-ggplotly(plot3)
 
 plot1
 plot2
@@ -36,10 +37,12 @@ plot3
 Gráfica Bidimensional
 
 ```{r, echo = FALSE}
-plot4 <- ggplot(data, aes(x = Provincia, fill = Tipo.de.accidente)) +
-  geom_bar(position = "identity")  +
+plot4 <- ggplot(data, aes(x = Tipo.de.accidente, fill = Provincia)) +
+  geom_bar(position = "stack")  + 
   ggtitle("Tipos de accidente por provincia") +
-  labs(x = "Provincia", y = "Cantidad", fill = "Tipo de accidente") 
+  labs(x = "Tipo de accidente", y = "Cantidad", fill = "Provincia")  + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+plot4 <-ggplotly(plot4)
 plot4
 ```
 
@@ -47,8 +50,20 @@ Gráfica de Facetas
 
 ```{r, echo = FALSE}
 plot6 <- ggplot(data, aes(x = Clase.de.accidente, fill = Estado.de.la.calzada)) +
-geom_bar() + facet_grid(. ~ Estado.del.tiempo) +
-labs(title = "Accidentes según estado del tiempo, de la calzada y su gravedad", x = "Tipo de accidente", y = "Cantidad", fill = "Estado de la calzada") + theme_minimal() + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+geom_bar(position="stack") + facet_grid(. ~ Estado.del.tiempo) +
+labs(title = "Accidentes según estado del tiempo, de la calzada y su gravedad", x = NULL, y = "Cantidad", fill = "Estado de la calzada") + theme_minimal() + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+plot6<-ggplotly(plot6)
 plot6
 ```
 
+Imagen Compuestada
+
+```{r, echo = FALSE}
+plot7 <- ggplot(data, aes(x = "", fill = Cantón)) +
+  geom_bar(width = 1) +
+  facet_wrap(~ Provincia, ncol = 3) +
+  theme_minimal() +
+  labs(title = "Accidentes por Cantón en cada Provincia", fill = "Cantón", x = NULL)
+
+plot7 <- ggplotly(plot7)
+plot7
