@@ -32,12 +32,23 @@ plot1
 plot2
 plot3
 ```
-Grafica Multidimensional \
+
+Gráfica Bidimensional
+
 ```{r, echo = FALSE}
 plot4 <- ggplot(data, aes(x = Provincia, fill = Tipo.de.accidente)) +
   geom_bar(position = "identity")  +
   ggtitle("Tipos de accidente por provincia") +
   labs(x = "Provincia", y = "Cantidad", fill = "Tipo de accidente") 
 plot4
+```
+
+Gráfica de Facetas
+
+```{r, echo = FALSE}
+plot6 <- ggplot(data, aes(x = Clase.de.accidente, fill = Estado.de.la.calzada)) +
+geom_bar() + facet_grid(. ~ Estado.del.tiempo) +
+labs(title = "Accidentes según estado del tiempo, de la calzada y su gravedad", x = "Tipo de accidente", y = "Cantidad", fill = "Estado de la calzada") + theme_minimal() + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+plot6
 ```
 
