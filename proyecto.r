@@ -20,7 +20,7 @@ plot2<-ggplot(data, aes(x="", y=Tipo.de.accidente, fill=Tipo.de.accidente)) +
   geom_bar(stat="identity", width=1) +
   coord_polar("y", start=0)+
   ggtitle("Tipo de accidente")
-print(plot2)
+#print(plot2)
 
 
 plot3<-ggplot(data, aes(Provincia, fill=Provincia))+geom_bar()+
@@ -31,7 +31,8 @@ plot3<-ggplot(data, aes(Provincia, fill=Provincia))+geom_bar()+
 
 #-------------------Gráficas bidimensionales---------------------
 
-
+plot3<-ggplot(data, aes(Provincia, fill=Provincia))+geom_bar()+
+    ggtitle("Provincia")
 #-------------------Gráficas multidimensionales------------------
 
 
